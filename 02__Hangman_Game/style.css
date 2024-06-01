@@ -1,0 +1,537 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 10px;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffc8dd;
+}
+
+.heading {
+  color: white;
+  font-weight: bold;
+  max-width: 1000px;
+  margin: 10px auto;
+  padding: 20px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.note {
+  font-size: 20px;
+  line-height: 1.7;
+  color: white;
+  font-weight: bold;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.note span {
+  color: #8bc34a;
+}
+
+.container {
+  margin: 20px auto;
+  width: 1000px;
+}
+
+.row {
+  display: flex;
+}
+
+hr {
+  border: 1px solid #222;
+}
+
+.game-info {
+  display: flex;
+}
+
+.game-info .game-name {
+  flex: 1;
+}
+
+.game-info .category {
+  flex: 1;
+  text-align: right;
+}
+
+.game-info .category span {
+  text-transform: capitalize;
+  color: #fff;
+  font-weight: bold;
+}
+
+.hangman-draw {
+  flex: 1;
+  background-color: rgb(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 324px;
+}
+
+.hangman-draw .the-draw {
+  width: 60px;
+  height: 280px;
+  border-bottom: 4px solid #222;
+  position: relative;
+  margin: auto;
+  left: -60px;
+  display: none;
+}
+
+.hangman-draw .the-stand {
+  position: absolute;
+  width: 4px;
+  background-color: #222;
+  height: 100%;
+  left: 50%;
+  margin-left: -2px;
+  display: none;
+}
+
+.hangman-draw .the-hang {
+  display: none;
+}
+
+.hangman-draw .the-hang:before {
+  content: "";
+  position: absolute;
+  height: 4px;
+  background-color: #222;
+  width: 100px;
+  left: 30px;
+  top: 15px;
+}
+
+.hangman-draw .the-hang:after {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 30px;
+  background-color: #222;
+  left: 130px;
+  top: 15px;
+}
+
+.hangman-draw .the-rope {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  position: absolute;
+  left: 95px;
+  top: 45px;
+  border: 4px dashed #222;
+  display: none;
+}
+
+.hangman-draw .the-man .head {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid #222;
+  position: absolute;
+  left: 105px;
+  top: 55px;
+  display: none;
+}
+
+.hangman-draw .the-man .body {
+  position: absolute;
+  background-color: #222;
+  width: 4px;
+  height: 110px;
+  top: 102px;
+  left: 130px;
+  display: none;
+}
+
+.hangman-draw .the-man .hands {
+  display: none;
+}
+
+.hangman-draw .the-man .hands:before {
+  left: 85px;
+  transform: rotate(30deg);
+}
+
+.hangman-draw .the-man .hands:after {
+  left: 130px;
+  transform: rotate(-30deg);
+}
+
+.hangman-draw .the-man .hands:before,
+.hangman-draw .the-man .hands:after {
+  content: "";
+  width: 50px;
+  position: absolute;
+  height: 4px;
+  background-color: #222;
+  top: 140px;
+}
+
+.hangman-draw .the-man .legs {
+  display: none;
+}
+
+.hangman-draw .the-man .legs:before {
+  left: 85px;
+  transform: rotate(-30deg);
+}
+
+.hangman-draw .the-man .legs:after {
+  left: 130px;
+  transform: rotate(30deg);
+}
+
+.hangman-draw .the-man .legs:before,
+.hangman-draw .the-man .legs:after {
+  content: "";
+  width: 50px;
+  position: absolute;
+  height: 4px;
+  background-color: #222;
+  top: 220px;
+}
+
+.hangman-draw.wrong-1 .the-draw {
+  display: block;
+}
+
+.hangman-draw.wrong-2 .the-stand {
+  display: block;
+}
+
+.hangman-draw.wrong-3 .the-hang {
+  display: block;
+}
+
+.hangman-draw.wrong-4 .the-rope {
+  display: block;
+}
+
+.hangman-draw.wrong-5 .head {
+  display: block;
+}
+
+.hangman-draw.wrong-6 .body {
+  display: block;
+}
+
+.hangman-draw.wrong-7 .hands {
+  display: block;
+}
+
+.hangman-draw.wrong-8 .legs {
+  display: block;
+}
+
+.letters {
+  flex: 1;
+  padding: 15px;
+  text-align: center;
+}
+
+.letters .letter-box {
+  width: 55px;
+  height: 55px;
+  display: inline-block;
+  background-color: #009688;
+  color: #fff;
+  font-size: 24px;
+  margin-right: 10px;
+  line-height: 55px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+  user-select: none;
+}
+
+.letters .letter-box.clicked {
+  background-color: #222;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.letters-guess {
+  margin: 10px auto;
+  background-color: rgb(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  min-height: 104px;
+}
+
+.letters-guess span {
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  margin-right: 10px;
+  text-align: center;
+  line-height: 60px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background-color: #fdfdfd;
+  border-bottom: 3px solid #222;
+  transition: 0.3s;
+}
+
+.letters-guess span.space {
+  background: none;
+  border-bottom: none;
+  position: relative;
+}
+
+.letters-guess span.space:before {
+  content: "";
+  width: 20px;
+  height: 4px;
+  background-color: #222;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.popup {
+  position: fixed;
+  background-color: #333333d9;
+  padding: 250px 20px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  font-size: 40px;
+  color: #fff;
+  z-index: 33;
+}
+
+.popup button {
+  display: block;
+  border: none;
+  background-color: #009688;
+  color: white;
+  font-weight: bold;
+  padding: 15px 20px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+.popup span {
+  color: #f44336;
+  font-weight: bold;
+}
+
+/* background */
+
+@keyframes cube {
+  from {
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(20) rotate(960deg) translate(-50%, -50%);
+    opacity: 0;
+  }
+}
+
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  background: #0040c1;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.background li {
+  position: absolute;
+  top: 80vh;
+  left: 45vw;
+  width: 10px;
+  height: 10px;
+  border: solid 1px #0039ad;
+  color: transparent;
+  transform-origin: top left;
+  transform: scale(0) rotate(0deg) translate(-50%, -50%);
+  animation: cube 7s ease-in forwards infinite;
+}
+
+.background li:nth-child(0) {
+  animation-delay: 0s;
+  left: 53vw;
+  top: 2vh;
+}
+
+.background li:nth-child(1) {
+  animation-delay: 2s;
+  left: 95vw;
+  top: 21vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(2) {
+  animation-delay: 4s;
+  left: 7vw;
+  top: 92vh;
+}
+
+.background li:nth-child(3) {
+  animation-delay: 6s;
+  left: 57vw;
+  top: 52vh;
+}
+
+.background li:nth-child(4) {
+  animation-delay: 8s;
+  left: 12vw;
+  top: 58vh;
+}
+
+.background li:nth-child(5) {
+  animation-delay: 10s;
+  left: 60vw;
+  top: 51vh;
+}
+
+.background li:nth-child(6) {
+  animation-delay: 12s;
+  left: 73vw;
+  top: 39vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(7) {
+  animation-delay: 14s;
+  left: 27vw;
+  top: 9vh;
+}
+
+.background li:nth-child(8) {
+  animation-delay: 16s;
+  left: 97vw;
+  top: 40vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(9) {
+  animation-delay: 18s;
+  left: 69vw;
+  top: 61vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(10) {
+  animation-delay: 20s;
+  left: 37vw;
+  top: 79vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(11) {
+  animation-delay: 22s;
+  left: 77vw;
+  top: 67vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(12) {
+  animation-delay: 24s;
+  left: 20vw;
+  top: 28vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(13) {
+  animation-delay: 26s;
+  left: 40vw;
+  top: 12vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(14) {
+  animation-delay: 28s;
+  left: 87vw;
+  top: 84vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(15) {
+  animation-delay: 30s;
+  left: 3vw;
+  top: 89vh;
+}
+
+.background li:nth-child(16) {
+  animation-delay: 32s;
+  left: 64vw;
+  top: 82vh;
+}
+
+.background li:nth-child(17) {
+  animation-delay: 34s;
+  left: 8vw;
+  top: 17vh;
+}
+
+.background li:nth-child(18) {
+  animation-delay: 36s;
+  left: 47vw;
+  top: 75vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(19) {
+  animation-delay: 38s;
+  left: 89vw;
+  top: 4vh;
+}
+
+.background li:nth-child(20) {
+  animation-delay: 40s;
+  left: 81vw;
+  top: 27vh;
+}
+
+.background li:nth-child(21) {
+  animation-delay: 42s;
+  left: 17vw;
+  top: 98vh;
+}
+
+.background li:nth-child(22) {
+  animation-delay: 44s;
+  left: 50vw;
+  top: 32vh;
+}
+
+.background li:nth-child(23) {
+  animation-delay: 46s;
+  left: 33vw;
+  top: 47vh;
+  border-color: #0046d4;
+}
+
+.background li:nth-child(24) {
+  animation-delay: 48s;
+  left: 31vw;
+  top: 69vh;
+  border-color: #0046d4;
+}
